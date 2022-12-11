@@ -1,7 +1,10 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 const BreadDetailsScreen = ({ navigation }) => {
+  const breads = useSelector((state) => state.bread.selected);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bread Details</Text>

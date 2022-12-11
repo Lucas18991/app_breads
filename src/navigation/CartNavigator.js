@@ -6,7 +6,7 @@ import { CategoriesScreen } from "../screens/CategoriesScreen";
 import { COLORS } from "../constants/colors";
 const Stack = createNativeStackNavigator();
 
-const ShopNavogatpr = () => {
+const CartNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Categories"
@@ -19,28 +19,14 @@ const ShopNavogatpr = () => {
       }}
     >
       <Stack.Screen
-        name="Categories"
-        component={CategoriesScreen}
+        name="Cart"
+        component={CartScreen}
         options={{
-          title: "EL Pan",
+          title: "Carrito",
         }}
-      />
-      <Stack.Screen
-        name="Bread"
-        component={CategoryBreadScreen}
-        options={({ route }) => ({
-          title: route.params.name,
-        })}
-      />
-      <Stack.Screen
-        name="Details"
-        component={BreadDetailsScreen}
-        options={({ route }) => ({
-          title: route.params.name,
-        })}
       />
     </Stack.Navigator>
   );
 };
 
-export default ShopNavigator;
+export default CartNavigator;
