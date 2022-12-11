@@ -8,7 +8,23 @@ const initalState = {
 };
 
 const BreadReducer = (state = initalState, action) => {
-  return state;
+  switch (action.type) {
+    case SELECTED_BREAD:
+      return {
+        ...state,
+        selected: state.breads.find((bread) => bread.id === action.breadID),
+      };
+    case FILTERED_BREAD:
+      return {
+        ...state,
+        filteredBread: state.breads.filter(
+          (bread) => bread.category === action.categoryID
+        ),
+      };
+
+    default:
+      return state;
+  }
 };
 
 export default BreadReducer;

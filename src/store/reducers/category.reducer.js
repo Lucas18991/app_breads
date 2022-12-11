@@ -17,7 +17,7 @@ const CategoryReducer = (state = initialState, action) => {
       return { ...state, selected: state.categories[IndexCategory] };
 
     default:
-      break;
+      return state;
 
     /* return state;*/
   }
