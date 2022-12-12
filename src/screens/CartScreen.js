@@ -8,9 +8,11 @@ import {
 import React from "react";
 import { CART } from "../data/cart";
 import CartItem from "../components/CartItem";
+import { useSelector } from "react-redux";
+
 const CartScreen = () => {
-  const items = CART;
-  const total = 120;
+  const items = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
   const handleConfirmCart = () => {
     console.log("Confirmar Carrito");
   };
