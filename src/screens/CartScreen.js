@@ -6,18 +6,19 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { CART } from "../data/cart";
 import CartItem from "../components/CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, confirmCart } from "../store/actions/cart.action";
 
 const CartScreen = () => {
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.total);
   const handleConfirmCart = () => {
-    console.log("Confirmar Carrito");
+    dispatch(confirmCart(items, total));
   };
-  const handleDeleteItem = () => {
-    console.log("Eliminar Carrito");
+  const handleDeleteItem = (id) => {
+    dispatch(removeItem(id));
   };
 
   const renderItem = ({ item }) => {
@@ -33,7 +34,7 @@ const CartScreen = () => {
         />
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.confirm}>
+        <TouchableOpacity style={styles.confirm} onPress={handleConfirmCart}>
           <Text>Confirmar</Text>
 
           <View style={styles.total}>
