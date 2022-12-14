@@ -6,7 +6,7 @@ import { CategoriesScreen } from "../screens/CategoriesScreen";
 import { COLORS } from "../constants/colors";
 const Stack = createNativeStackNavigator();
 
-const ShopNavogatpr = () => {
+const ShopNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Categories"

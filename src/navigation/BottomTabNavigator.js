@@ -8,43 +8,55 @@ const BottomTabs = createBottomTabNavigator();
 
 export default BottomTabNavigator = () => {
   return (
-    <NavigationContainer>
-      <BottonTabs.Navigator
-        initialRouteName="ShopTab"
-        screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: styles.TabBar,
+    <BottonTabs.Navigator
+      initialRouteName="ShopTab"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: styles.TabBar,
+      }}
+    >
+      <BottomTabs.Screen
+        name="ShopTab"
+        component={ShopNavigator}
+        options={{
+          tabBarIcon: ({ focus }) => (
+            <View style={styles.item}>
+              <IonIcons name="home" size={20} color="black" />
+              <Text>Tienda</Text>
+            </View>
+          ),
         }}
-      >
-        <BottomTabs.Screen
-          name="ShopTab"
-          component={ShopNavigator}
-          options={{
-            tabBarIcon: ({ focus }) => (
-              <View style={styles.item}>
-                <IonIcons name="home" size={20} color="black" />
-                <Text>Tienda</Text>
-              </View>
-            ),
-          }}
-        />
+      />
 
-        <BottomTabs.Screen
-          name="CartTab"
-          component={CartNavigator}
-          options={{
-            tabBarIcon: ({ focus }) => (
-              <View style={styles.item}>
-                <IonIcons name="cart" size={20} color="black" />
+      <BottomTabs.Screen
+        name="CartTab"
+        component={CartNavigator}
+        options={{
+          tabBarIcon: ({ focus }) => (
+            <View style={styles.item}>
+              <IonIcons name="cart" size={20} color="black" />
 
-                <Text>Carrito</Text>
-              </View>
-            ),
-          }}
-        />
-      </BottonTabs.Navigator>
-    </NavigationContainer>
+              <Text>Carrito</Text>
+            </View>
+          ),
+        }}
+      />
+
+      <BottomTabs.Screen
+        name="OrdersTab"
+        component={OrdersNavigator}
+        options={{
+          tabBarIcon: ({ focus }) => (
+            <View style={styles.item}>
+              <IonIcons name="list" size={20} color="black" />
+
+              <Text>Ordenes</Text>
+            </View>
+          ),
+        }}
+      />
+    </BottonTabs.Navigator>
   );
 };
 const styles = StyleSheet.create({

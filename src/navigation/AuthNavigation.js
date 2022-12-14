@@ -1,11 +1,13 @@
+import AuthScreen from "../screens/AuthScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import { COLORS } from "../constants/colors";
 const Stack = createNativeStackNavigator();
 
-const CartNavigator = () => {
+const AuthNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Categories"
+      initialRouteName="Login"
       screenOptions={{
         headerStyle: { backgroundcColor: COLORS.primary },
         headerTintColor: COLORS.secondary,
@@ -14,15 +16,9 @@ const CartNavigator = () => {
         },
       }}
     >
-      <Stack.Screen
-        name="Cart"
-        component={CartScreen}
-        options={{
-          title: "Carrito",
-        }}
-      />
+      <Stack.Screen name="Login" component={AuthScreen} />
     </Stack.Navigator>
   );
 };
 
-export default CartNavigator;
+export default AuthNavigation;
