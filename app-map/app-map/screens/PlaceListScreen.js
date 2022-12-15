@@ -1,18 +1,25 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React from "react";
+import { useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
 const PlaceListScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text>Direcciones</Text>
-        </View>
-    )
-}
+  const places = useSelector((state) => state.places);
+  useEffect(() => {
+    console.log(places);
+  }, [places]);
+
+  return (
+    <View style={styles.container}>
+      <Text>Direcciones</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})
+  container: {
+    flex: 1,
+  },
+});
 
-export default PlaceListScreen
+export default PlaceListScreen;
