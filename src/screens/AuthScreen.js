@@ -66,27 +66,30 @@ export default function AuthScreen() {
 
   const onInputChangeHandler = useCallback(
     (inputIdentifier, InputValue, InputValidity) => {
-      dispatchFormState({
+      formDispatch({
         type: FORM_INPUT_UPDATE,
         value: InputValue,
         isValid: InputValidity,
         Input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [formDispatch]
   );
   return (
     <KeyboardAvoidingView style={styles.screen}>
       <View style={styles.container}>
         <Text style={styles.title}>Panaderia Login</Text>
         <View>
-          <TextInput
-            style={styles.input}
+          <Input
             id="email"
+            label="Email"
             placeholder="email"
             keyboardType="email-address"
+            required
+            email
             autoCapitalize="none"
-            onChangeText={setEmail}
+            errorText="Por favor ingrese un email valido"
+            onInputChange={onInputChangeHandler}
             initialValue=""
           />
           <TextInput
