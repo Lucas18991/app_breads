@@ -5,21 +5,76 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Button,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { COLORS } from "../constants/colors";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/actions/auth.action";
+import { Input } from "../components/Input";
+import { useReducer } from "react";
+import { useEffect } from "react";
+import { useCallback } from "react";
+
+const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const formReducer = (state, action) => {
+  if (action.type === FORM_INPUT_UPDATE) {
+    const updateValues = {
+      ...state.inputValues,
+      [action.input]: action.isValid,
+    };
+    const updatedValidities = {
+      ...state.inputValidities,
+      [action.input]: action.isValid,
+    };
+    let updatedFormIsValid = true;
+    for (const key in updatedValidities) {
+      updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+    }
+    return {
+      formIsValid: updatedFormIsValid,
+      inputValidities: updatedValidities,
+      inputValues: updateValues,
+    };
+  }
+};
 
 export default function AuthScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const [formState, formDispatch] = useReducer(formReducer, {
+    inputValues: {
+      email: "",
+      password: "",
+    },
+    inputValidities: {
+      email: false,
+      password: false,
+    },
+    formIsValid: false,
+  });
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("Ocurrio un error", error, [{ text: "Ok" }]);
+    }
+  });
 
   const handleSignUp = () => {
     dispatch(signUp(email, password));
   };
 
+  const onInputChangeHandler = useCallback(
+    (inputIdentifier, InputValue, InputValidity) => {
+      dispatchFormState({
+        type: FORM_INPUT_UPDATE,
+        value: InputValue,
+        isValid: InputValidity,
+        Input: inputIdentifier,
+      });
+    },
+    [dispatchFormState]
+  );
   return (
     <KeyboardAvoidingView style={styles.screen}>
       <View style={styles.container}>
